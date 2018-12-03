@@ -1,49 +1,168 @@
 <!DOCTYPE html>
-<!--
-    Licensed to the Apache Software Foundation (ASF) under one
-    or more contributor license agreements.  See the NOTICE file
-    distributed with this work for additional information
-    regarding copyright ownership.  The ASF licenses this file
-    to you under the Apache License, Version 2.0 (the
-    "License"); you may not use this file except in compliance
-    with the License.  You may obtain a copy of the License at
-
-    http://www.apache.org/licenses/LICENSE-2.0
-
-    Unless required by applicable law or agreed to in writing,
-    software distributed under the License is distributed on an
-    "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
-     KIND, either express or implied.  See the License for the
-    specific language governing permissions and limitations
-    under the License.
--->
 <html>
-    <head>
-        <!--
-        Customize this policy to fit your own app's needs. For more guidance, see:
-            https://github.com/apache/cordova-plugin-whitelist/blob/master/README.md#content-security-policy
-        Some notes:
-            * gap: is required only on iOS (when using UIWebView) and is needed for JS->native communication
-            * https://ssl.gstatic.com is required only on Android and is needed for TalkBack to function properly
-            * Disables use of inline scripts in order to mitigate risk of XSS vulnerabilities. To change this:
-                * Enable inline JS: add 'unsafe-inline' to default-src
-        -->
-        <meta http-equiv="Content-Security-Policy" content="default-src 'self' data: gap: https://ssl.gstatic.com 'unsafe-eval'; style-src 'self' 'unsafe-inline'; media-src *; img-src 'self' data: content:;">
-        <meta name="format-detection" content="telephone=no">
-        <meta name="msapplication-tap-highlight" content="no">
-        <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width">
-        <link rel="stylesheet" type="text/css" href="css/index.css">
-        <title>Hello World</title>
-    </head>
-    <body>
-        <div class="app">
-            <h1>Apache Cordova</h1>
-            <div id="deviceready" class="blink">
-                <p class="event listening">Connecting to Device</p>
-                <p class="event received">Device is Ready</p>
-            </div>
+<head>
+    <meta charset="utf-8" />
+    <meta name="format-detection" content="telephone=no" />
+    <meta name="msapplication-tap-highlight" content="no" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1, maximum-scale=1, minimum-scale=1, width=device-width" />
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'unsafe-inline'; style-src 'self' 'unsafe-inline'; media-src *" />
+    <title>Estacionamento</title>
+    <script type="text/javascript">
+        function somahora(){
+            var he=document.getElementById("he").value;
+            if(he<10){
+                he='0'+he;
+            }
+            var me=document.getElementById("me").value;
+            if(me<10){
+                me='0'+me;
+            }
+            var hs=document.getElementById("hs").value;
+            if(hs<10){
+               hs='0'+hs;
+            }
+            var ms=document.getElementById("ms").value;
+            if(ms<10){
+                ms='0'+ms;
+            }
+            var ht=hs-he;
+            var mt=ms-me;
+            var valor;
+            ///calculo de hora
+            if(mt<0){
+                ht--;
+                mt=60+mt;
+            }
+
+            ///calculo de valor
+            valor =0;
+            valor=7*ht;
+
+            if(mt>0&&mt<20){
+                valor+=2.50;
+            }
+
+            if(mt>20&&mt<41){
+                valor+=4.75;
+            }
+            
+            if(mt>40)
+                valor+=7;
+
+            if(ht>=3 && mt>20){
+                valor=25;
+            }
+
+            document.getElementById("htotal").value=ht+":"+mt;
+            document.getElementById("valor").value="R$"+valor+",00";
+            if(mt<10){
+                document.getElementById("htotal").value=ht+":0"+mt;
+            }
+
+            if(hs==he)
+                if(ms<me){
+                    alert("Hora de Saida nao pode ser menor que hora de entrada!!!");
+                    document.getElementById("htotal").value="0";
+                    document.getElementById("valor").value="0";
+                }
+
+            if(hs<he){
+                alert("Hora de Saida nao pode ser menor que hora de entrada!!!");
+                document.getElementById("htotal").value="0";
+                document.getElementById("valor").value="0";
+            }
+        }
+
+
+        function somahora2(){
+            var he=document.getElementById("he").value;
+            if(he<10){
+                he='0'+he;
+            }
+            var me=document.getElementById("me").value;
+            if(me<10){
+                me='0'+me;
+            }
+            var hs=document.getElementById("hs").value;
+            if(hs<10){
+               hs='0'+hs;
+            }
+            var ms=document.getElementById("ms").value;
+            if(ms<10){
+                ms='0'+ms;
+            }
+            var ht=hs-he;
+            var mt=ms-me;
+            var valor;
+            ///calculo de hora
+            if(mt<0){
+                ht--;
+                mt=60+mt;
+            }
+
+            //calculo de valor
+            valor =0;
+            valor=3.75*ht;
+
+            if(mt>0&&mt<21){
+                valor+=1.25;
+            }
+
+            if(mt>20&&mt<41){
+                valor+=2.50;
+            }
+            
+            if(mt>40)
+                valor+=3.75;
+
+            if(ht>=3 && mt>20){
+                valor=12;
+            }
+
+            document.getElementById("htotal").value=ht+":"+mt;
+            document.getElementById("valor").value="R$"+valor+",00";
+            if(mt<10){
+                document.getElementById("htotal").value=ht+":0"+mt;
+            }
+
+            if(hs==he)
+                if(ms<me){
+                    alert("Hora de Saida nao pode ser menor que hora de entrada!!!");
+                    document.getElementById("htotal").value="0";
+                    document.getElementById("valor").value="0";
+                }
+
+            if(hs<he){
+                alert("Hora de Saida nao pode ser menor que hora de entrada!!!");
+                document.getElementById("htotal").value="0";
+                document.getElementById("valor").value="0";
+            }
+        }
+
+
+    </script>
+</head>
+    <body style=" width: 95%; height: 80%;">
+        <div style="text-align: center; color: red;">
+            <h1>Estacionamento</h1>
+            <h2>Insira Hora de entrada</h2>
+            <input id="he" type="number" min="8" max="20" placeholder="HORA ENTRADA">
+            <input id="me" type="number" min="0" max="60" placeholder="MINUTO ENTRADA">
+            <h2>Insira a hora de Saida</h2>
+            <input id="hs" type="number" min="8" max="20" placeholder="HORA SAIDA">
+            <input id="ms" type="number" min="0" max="60" placeholder="MINUTO SAIDA">
+            <br>
+            <button onclick="somahora()" >Calcular</button>
+            <h2>Total de Horas</h2>
+            <input id="htotal" type="text" name="total">
+            <h2>Valor</h2>
+            <input id="valor" type="text" name="saida"><button onclick="somahora2()" >Moto</button>
         </div>
-        <script type="text/javascript" src="cordova.js"></script>
-        <script type="text/javascript" src="js/index.js"></script>
-    </body>
+    <script type="text/javascript" src="cordova.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript">
+        app.initialize();
+    </script>
+</body>
+
 </html>
